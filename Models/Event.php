@@ -41,7 +41,7 @@ class Event
 
     public function getListeEvent($currYear)
 	{
-		$s = "SELECT dateEvent,titreEvent,libelleType,nbPlaceEvent FROM event,typeevent WHERE event.idType = typeevent.idType AND dateEvent BETWEEN :date1 AND :date2";
+		$s = "SELECT dateEvent,titreEvent,libelleType,nbPlaceEvent,idEvent FROM event,typeevent WHERE event.idType = typeevent.idType AND dateEvent BETWEEN :date1 AND :date2";
 		$val = array(":date1" => $currYear.'-01-01',
 					 ":date2" => $currYear.'-12-31'
 					 );

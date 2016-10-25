@@ -10,6 +10,7 @@ $(document).ready(function () {
     $('#personne').hide();
     $('#eventVide').hide();
     $('#titre').hide();
+    $('#headTable').hide();
     $.get("eventJson.php", function (data) {
         for (var i = 0; i < data.length; i++) {
             dateEvent[i] = data[i].dateEvent;
@@ -19,8 +20,8 @@ $(document).ready(function () {
             nbParticipant[i] = data[i].nbParticipant;
         }
         ;
-        $("#datepicker").datepicker("destroy");
-        $("#datepicker").datepicker(
+        $("#datepickerAnnulation").datepicker("destroy");
+        $("#datepickerAnnulation").datepicker(
             {
                 prevText: 'Précédent',
                 nextText: 'Suivant',
@@ -36,6 +37,7 @@ $(document).ready(function () {
                         $('#tbody').empty();
                         $('#titre').show();
                         $('#titreEvent').show();
+                        $('#headTable').show();
                         $('#titreEvent').empty();
                         $('#titreEvent').append(data.titreEvent);
                         for (var i = 0; i < data.personne.length; i++) {
@@ -50,12 +52,14 @@ $(document).ready(function () {
                         else {
                             $('#personne').show();
                         }
-                        $('#datepicker').on('click', function () {
-                            $('#eventVide').empty();
-                            $('#tbody').empty();
-                            $('#personne').hide();
-                            $('#eventVide').hide();
-                        });
+                        /*$('#datepickerAnnulation').on('click', function () {
+                         $('#eventVide').empty();
+                         $('#tbody').empty();
+                         $('#personne').hide();
+                         $('#eventVide').hide();
+                         $('#headTable').hide();
+                         $('#titre').hide();
+                         });*/
                         (function (i) {
                             for (var i = 0; i < imax; i++) {
                                 $('#idPersonne' + i).on('click', function () {
@@ -64,6 +68,11 @@ $(document).ready(function () {
                                     var numRow = $(this).attr('id').match(/[0-9]/);
                                     $.get('eventJsonChange.php?idPersonne=' + idPersonne, function () {
                                         $('#tr' + numRow).remove();
+                                        if ($('#tbody').find("tr").length === 0) {
+                                            $('#personne').hide();
+                                            $('#eventVide').show();
+                                            $('#eventVide').append('Cet évènement n\' a pas encore de participant');
+                                        }
                                     })
                                 })
                             }
@@ -73,9 +82,9 @@ $(document).ready(function () {
                 }
             });
         currYear = $(".ui-datepicker-year").html();
-        $('#datepicker').datepicker("refresh");
+        $('#datepickerAnnulation').datepicker("refresh");
     }, "json");
-    $("#datepicker").on("click", function () {
+    $("#datepickerAnnulation").on("click", function () {
         if ($('.ui-datepicker-year').html() != currYear) {
             currYear = $(".ui-datepicker-year").html();
             var dataSent = currYear;
@@ -87,7 +96,7 @@ $(document).ready(function () {
                     nbParticipant[i] = data[i].nbParticipant;
                 }
                 ;
-                $('#datepicker').datepicker("refresh");
+                $('#datepickerAnnulation').datepicker("refresh");
             }, "json")
         }
     })

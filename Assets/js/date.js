@@ -5,91 +5,81 @@
  */
 
 
-$(document).ready(function()
-{
-	var dateEvent = [];
-	var titreEvent = [];
-	var nbPlaceEvent = [];
-	var typeEvent = [];
-	var currYear;
-        
-        
-         $("#ValiderEvent").hide();
+$(document).ready(function () {
+    var dateEvent = [];
+    var titreEvent = [];
+    var nbPlaceEvent = [];
+    var typeEvent = [];
+    var currYear;
 
-	$.get("../Controllers/EventDatePicker-f.php", function(data)
-	{
-		for (var i = 0; i < data.length; i++) {
-			dateEvent[i] = data[i].dateEvent;
-			titreEvent[i] = data[i].titreEvent;
-			nbPlaceEvent[i] = data[i].nbPlaceEvent;
-			typeEvent[i] = data[i].libelleType;
-		};
-		$("#datepicker").datepicker("destroy");
-		$("#datepicker").datepicker(
-		{
-	        prevText: 'Précédent',
-	        nextText: 'Suivant',
-	        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-	        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-	        weekHeader: 'Sem.',
-	        dateFormat: 'yy-mm-dd',
-			beforeShowDay: highlightDate,
-			onSelect : function(dateChoisie, inst)
-			{
-                            $('#datePicked').val(dateChoisie);
-                           
-                            $("#ValiderEvent").show();
-                        },
-				/*
-                                 $.get("../Controllers/ListeEventClient.php?dateChoisie="+dateChoisie, function(data)
-				{
 
-				})*/
-			
-		});
+    $("#ValiderEvent").hide();
 
-		currYear = $('.ui-datepicker-year'.html());
+    $.get("../Controllers/EventDatePicker-f.php", function (data) {
+        for (var i = 0; i < data.length; i++) {
+            dateEvent[i] = data[i].dateEvent;
+            titreEvent[i] = data[i].titreEvent;
+            nbPlaceEvent[i] = data[i].nbPlaceEvent;
+            typeEvent[i] = data[i].libelleType;
+        }
+        ;
+        $("#datepicker").datepicker("destroy");
+        $("#datepicker").datepicker(
+            {
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: highlightDate,
+                onSelect: function (dateChoisie, inst) {
+                    $('#datePicked').val(dateChoisie);
 
-		$('#datepicker').datepicker("refresh");
-	},"json");
+                    $("#ValiderEvent").show();
+                },
+                /*
+                 $.get("../Controllers/ListeEventClient.php?dateChoisie="+dateChoisie, function(data)
+                 {
 
-	$("#datepicker").on("click",function()
-	{
+                 })*/
 
-			if($('.ui-datepicker-year').html() != currYear)
-			{
-				var thisYear = $('.ui-datepicker-year').html()
+            });
 
-				$.get("../Controllers/EventDatePickerInscription.php?dataSent="+thisYear, function(data)
-				{	
-					for (var i = 0; i < data.length; i++) 
-					{
-						dateEvent[i] = data[i].dateEvent;
-						titreEvent[i] = data[i].titreEvent;
-						nbPlaceEvent[i] = data[i].nbPlaceEvent;
-					};
-					$('#datepicker').datepicker("refresh");
-				},"json")
-			}	
-	});
-        
-	function highlightDate(date)
-	{
-		for (var i = 0; i < dateEvent.length; i++) 
-		{
-			if($.datepicker.formatDate("yy-mm-dd", date) == dateEvent[i])
-			{
-				if(nbPlaceEvent[i] == 0)
-				{
-					return [false , "eventComplet"];
-				}
-				else
-				{
-					return [true, "eventOk" , typeEvent[i] +" : "+titreEvent[i] + " est disponible"];
-				}
-			}
-		}
-		return [false,''];
-	}
-        
+        currYear = $('.ui-datepicker-year'.html());
+
+        $('#datepicker').datepicker("refresh");
+    }, "json");
+
+    $("#datepicker").on("click", function () {
+
+        if ($('.ui-datepicker-year').html() != currYear) {
+            var thisYear = $('.ui-datepicker-year').html()
+
+            $.get("../Controllers/EventDatePickerInscription.php?dataSent=" + thisYear, function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dateEvent[i] = data[i].dateEvent;
+                    titreEvent[i] = data[i].titreEvent;
+                    nbPlaceEvent[i] = data[i].nbPlaceEvent;
+                }
+                ;
+                $('#datepicker').datepicker("refresh");
+            }, "json")
+        }
+    });
+
+    function highlightDate(date) {
+        for (var i = 0; i < dateEvent.length; i++) {
+            if ($.datepicker.formatDate("yy-mm-dd", date) == dateEvent[i]) {
+                if (nbPlaceEvent[i] == 0) {
+                    return [false, "eventComplet"];
+                }
+                else {
+                    return [true, "eventOk", typeEvent[i] + " : " + titreEvent[i] + " est disponible"];
+                }
+            }
+        }
+        return [false, ''];
+    }
+
 })
