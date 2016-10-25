@@ -20,7 +20,7 @@ class Event
      * idEvent + titre + date + libelle
      * @return array Retourne un tableau contenant toutes les infos de l'event
      */
-    public function getListeEvent($year)
+    /*public function getListeEvent($year)
     {
         $selectEvent = "SELECT idEvent,nbPlaceEvent,titreEvent,dateEvent,libelleType 
                         FROM event,typeevent 
@@ -37,7 +37,23 @@ class Event
         }
 
         return $tabEvent;
-    }
+    }*/
+
+    public function getListeEvent($currYear)
+	{
+		$s = "SELECT dateEvent,titreEvent,libelleType,nbPlaceEvent,idEvent FROM event,typeevent WHERE event.idType = typeevent.idType AND dateEvent BETWEEN :date1 AND :date2";
+		$val = array(":date1" => $currYear.'-01-01',
+					 ":date2" => $currYear.'-12-31'
+					 );
+		$r = $this->cnx->prepare($s);
+		$r->execute($val);
+		$tab = array();
+		while($rep = $r->fetchObject())
+		{
+			$tab[] = $rep;
+		}
+		return $tab;
+	}
 
     /**
      * Permet d'obtenir le nombre de places restantes selon un event
@@ -252,6 +268,7 @@ class Event
             return $rep->idEvent;
         }
     }
+
     public function getTitreEvent($idEvent)
     {
         $s = "SELECT titreEvent FROM event WHERE idEvent = :idEvent";
@@ -263,6 +280,17 @@ class Event
             return $rep->titreEvent;
         }
     }
+    public function getTitreEventByDate($dateEvent)
+	{
+		$s = "SELECT titreEvent FROM event WHERE dateEvent = :dateEvent";
+		$val = array(':dateEvent' => $dateEvent);
+		$r = $this->cnx->prepare($s);
+		$r->execute($val);
+		while($rep = $r->fetchObject())
+		{
+			return $rep->titreEvent;
+		}
+	}
     // public function getPlacesReservees($idEvent){
 
     //     $tabPlacesReservees = [];
@@ -317,7 +345,48 @@ class Event
 
         echo json_encode($nbrePlace, JSON_UNESCAPED_UNICODE);
     }
-    
+
+    public function getNbPlaceAchete($dateEvent)
+	{
+		$s = "SELECT count(participer.idPersonne) as nbParticipant FROM participer,event WHERE event.idEvent = participer.idEvent AND dateEvent = :dateEvent";
+		$val = array(':dateEvent' => $dateEvent);
+		$r = $this->cnx->prepare($s);
+		$r->execute($val);
+		while($rep = $r->fetchObject())
+		{
+			return $rep->nbParticipant;
+		}
+	}
+
+	public function affichePersonneEvent($dateEvent)
+	{
+		$s = "SELECT nomPersonne,prenomPersonne,mailPersonne,participer.idPersonne,count(numPlaceAchete) as nbPlaceAchete
+			  FROM event,participer,personne 
+			  WHERE participer.idEvent = event.idEvent
+			  AND participer.idPersonne = personne.idPersonne 
+			  AND dateEvent = :dateEvent 
+			  GROUP BY nomPersonne,prenomPersonne,mailPersonne,participer.idPersonne";
+		$val = array(':dateEvent' => $dateEvent);
+		$r = $this->cnx->prepare($s);
+		$r->execute($val);
+		$tab = array();
+		while($rep = $r->fetchObject())
+		{
+			$tab[] = $rep;
+		}
+		return $tab;
+	}
+
+	public function supprimeParticipant($dateEvent,$idPersonne)
+	{
+		$idEvent = $this->getIdEvent($dateEvent);
+		$s = "DELETE FROM participer WHERE idEvent = :idEvent AND idPersonne = :idPersonne";
+		$val = array(':idEvent'    => $idEvent,
+					 ':idPersonne' => $idPersonne
+					 );
+		$r = $this->cnx->prepare($s);
+		$r->execute($val);
+	}
 
 
 }

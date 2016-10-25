@@ -32,7 +32,7 @@ body {
 
 /* Image des cercles */
 
-.img1, .img2, .admin, .user {
+.img1, .img2, .admin, .user, .cancel {
     height: 200px;
     width: 200px;
     -moz-box-shadow: 0px 0px 10px #343434;
@@ -47,7 +47,7 @@ body {
     filter: alpha(opacity=100);
 }
 
-.img1:hover, .img2:hover, .admin:hover, .user:hover {
+.img1:hover, .img2:hover, .admin:hover, .user:hover, .cancel:hover {
     opacity: 0.3;
     filter: alpha(opacity=30);
     cursor: pointer;
@@ -59,6 +59,10 @@ body {
 
 .img2 {
     background: url('../images/list.png') center center no-repeat scroll;
+}
+
+.cancel {
+    background: url('../images/cancel.png') center center no-repeat scroll;
 }
 
 .admin {
@@ -85,8 +89,9 @@ footer {
     background-image: none !important;
     color: #ffffff !important;
 }
-.eventNonDispo a:hover{
-   cursor:default;
+
+.eventNonDispo a:hover {
+    cursor: default;
 }
 
 /* Modal Bootstrap customization */
@@ -191,4 +196,24 @@ footer {
 
 .message {
     margin-top: 15px;
+}
+
+/* Customize BackOffice Annulation Inscription Evenement */
+
+.eventOk a {
+    background-color: #40EF15 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.eventComplet span {
+    background-color: #AF4030 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.eventAnnulation a {
+    background-color: #FF9A01 !important;
+    background-image: none !important;
+    color: #ffffff !important;
 }

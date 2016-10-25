@@ -1,16 +1,15 @@
 <?php
+//Démarre une nouvelle session ou reprend une session existante
+session_start();
 
 require '../Autoloader.php';
 Autoloader::register();
-
-//Démarre une nouvelle session ou reprend une session existante
-session_start();
 
  if (isset($_POST['ChoixEvent'], $_POST['ValiderChoixEvent'])) {
 	
 	$idEvent = $_POST['ChoixEvent'] ;
 	$_SESSION['idEvent'] = $idEvent;
-        
+
 	$myEvent = new Event();
 
 	//la methode getInfosEvent renvoie sous forme de tableau les informations de l'evenement $idEvent souhaité

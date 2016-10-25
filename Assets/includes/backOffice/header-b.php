@@ -62,6 +62,9 @@
                 <li>
                     <a href="../Controllers/ListeEvent.php">Liste</a>
                 </li>
+                <li>
+                    <a href="../Controllers/AnnulationEvent.php">Annuler</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -142,9 +142,9 @@ var count = 0;
         //Appel la fonction "afficheBokkedSeats"
         afficheBookedSeats();
         
-        setTimeout(function(){
+        /*setTimeout(function(){
             window.location.reload(true);
-        }, 3000);
+        }, 3000);*/
         
 
     })
