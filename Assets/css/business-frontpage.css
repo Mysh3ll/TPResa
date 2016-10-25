@@ -85,8 +85,9 @@ footer {
     background-image: none !important;
     color: #ffffff !important;
 }
-.eventNonDispo a:hover{
-   cursor:default;
+
+.eventNonDispo a:hover {
+    cursor: default;
 }
 
 /* Modal Bootstrap customization */
@@ -191,4 +192,24 @@ footer {
 
 .message {
     margin-top: 15px;
+}
+
+/* Customize BackOffice Annulation Inscription Evenement */
+
+.eventOk a {
+    background-color: #40EF15 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.eventComplet span {
+    background-color: #AF4030 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.eventAnnulation a {
+    background-color: #FF9A01 !important;
+    background-image: none !important;
+    color: #ffffff !important;
 }
