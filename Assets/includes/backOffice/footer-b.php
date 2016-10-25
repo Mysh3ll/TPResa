@@ -28,13 +28,13 @@
 
 <!-- Datepicker -->
 <script src="../Assets/js/datepicker-b.js"></script>
+<script src="../Assets/js/dateAnnulation.js"></script>
 
 <!-- Main JS -->
 <script src="../Assets/js/main.js"></script>
 
 <!-- Selected Seats -->
 <script src="../Assets/js/seatViewer.js"></script>
-
 
 </body>
 
