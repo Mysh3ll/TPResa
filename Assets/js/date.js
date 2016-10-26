@@ -10,6 +10,8 @@ $(document).ready(function () {
     var titreEvent = [];
     var nbPlaceEvent = [];
     var typeEvent = [];
+    //set variable path de l'affiche
+    var AfficheEvent;
     var currYear;
 
 
@@ -37,6 +39,16 @@ $(document).ready(function () {
                     $('#datePicked').val(dateChoisie);
 
                     $("#ValiderEvent").show();
+
+                    //requête ajax qui permet de récupérer le path de l'affiche pour la date choisie
+                    $.get("../Controllers/AfficheDatePicker-f.php?dataSent=" + dateChoisie, function (data) {
+
+                        //path
+                        AfficheEvent = data.afficheEvent;
+                        //changement de l'attribut "src" pour l'affichage de l'image
+                        $('#afficheEvent').attr("src", AfficheEvent);
+
+                    }, "json")
                 },
                 /*
                  $.get("../Controllers/ListeEventClient.php?dateChoisie="+dateChoisie, function(data)

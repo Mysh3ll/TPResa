@@ -389,5 +389,16 @@ class Event
 		$r->execute($val);
 	}
 
+	public function getPath($dateEvent)
+    {
+        $s = "SELECT path FROM event WHERE dateEvent = :dateEvent";
+        $val = array("dateEvent" => $dateEvent);
+        $r = $this->cnx->prepare($s);
+        $r->execute($val);
+        while($rep = $r->fetch(PDO::FETCH_OBJ))
+        {
+            return $rep->path;
+        }
+    }
 
 }
