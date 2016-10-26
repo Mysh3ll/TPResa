@@ -175,7 +175,7 @@ class Event
         echo json_encode($nbrePlaceReserve, JSON_NUMERIC_CHECK);
     }
 
-    public function insertNewEvent($titre, $date, $type, $nbPlaces)
+    public function insertNewEvent($titre, $date, $type, $nbPlaces, $path = null)
     {
 
         $returnMessage = '';
@@ -196,11 +196,12 @@ class Event
             $paramsEvent = array(':titre'    => $titre,
                                  ':dateE'    => $date,
                                  ':nbPlaces' => $nbPlaces,
-                                 ':type'     => $type
+                                 ':type'     => $type,
+                                 ':path'     => $path
             );
 
-            $r = 'INSERT INTO event( titreEvent, dateEvent, nbPlaceEvent, idType)
-                  VALUES (:titre,:dateE,:nbPlaces,:type)';
+            $r = 'INSERT INTO event( titreEvent, dateEvent, nbPlaceEvent, idType, path)
+                  VALUES (:titre,:dateE,:nbPlaces,:type,:path)';
 
             $ret = $this->cnx->prepare($r);
             $ret->execute($paramsEvent);
