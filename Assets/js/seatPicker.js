@@ -154,7 +154,7 @@ var count = 0;
 
         //Appel la fonction "afficheBokkedSeats"
         //afficheBookedSeats();
-        
+
         /*setTimeout(function(){
             window.location.reload(true);
         }, 3000);*/
