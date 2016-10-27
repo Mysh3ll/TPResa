@@ -23,6 +23,10 @@ include '../Assets/includes/frontOffice/header-f.php';
                                 <label class="col-md-4 control-label text-right" for="datepicker">Choissisez un
                                     évènement : </label>
                                 <div class="col-md-4" id="datepicker" name="datePicker"></div>
+                                <!-- Affiche Event -->
+                                <div class="col-md-4">
+                                    <img id="afficheEvent" src="" alt="" class="img-responsive">
+                                </div>
 
                                 <input type="text" hidden="true" name="datePicked" id="datePicked"/>
                             </div>
@@ -39,11 +43,11 @@ include '../Assets/includes/frontOffice/header-f.php';
                     </form>
                 </div>
             </div>
+            <!-- /.row -->
         </div>
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
 
 
-    <?php include '../Assets/includes/frontOffice/footer-f.php'; ?>
+        <?php include '../Assets/includes/frontOffice/footer-f.php'; ?>
 
     

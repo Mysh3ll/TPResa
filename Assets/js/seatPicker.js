@@ -97,22 +97,22 @@ var count = 0;
                  count ++ ;
              }
          }
-            
+
          if(count == 0 ){
               $('#ValiderParticipation').hide();
          }else{
              $('#ValiderParticipation').show();
          }
-        
+
     });
 
     //Après validation du formulaire on insert les données dans la BDD par de la requête ajax
     $('#inscriptionEvent').submit(function (event) {
-       
+
         $('#confirmReservation').empty();
         event.preventDefault();
-        
-        
+
+
         var str = [], item;
         $.each($('#place li.' + settings.selectingSeatCss + ' a'), function (index, value) {
             item = $(this).attr('title');
@@ -125,27 +125,40 @@ var count = 0;
         var nomPersonne = $('#NomUser').val();
         var prenomPersonne = $('#PrenomUser').val();
         var mailPersonne = $('#MailUser').val();
-        
-       
-            
-            //requête ajax pour l'insertion des données dans la- BDD
-             $.post('../Controllers/EventSelectedSeatPicker-Front.php', 'selectedSeat=' + selectedSeat + '&nomPersonne=' + nomPersonne + '&prenomPersonne=' + prenomPersonne + '&mailPersonne=' + mailPersonne);
-             //Affiche le message de confirmation de réservation si l'user a choisi des places
-             $('#confirmReservation').show();
-             $('#confirmReservation').append('<strong>Réservation effectuée.</strong>');
-             $('#ValiderParticipation').hide();
 
-            //$('#errorMessage').show();
-            //$('#errorMessage').append('<strong>Vous devez selectionnez une place</strong>')
-       
-   
+        var resultRequest;
+        var returnMessage = '' ;
+
+            //requête ajax pour l'insertion des données dans la- BDD
+             $.post('../Controllers/EventSelectedSeatPicker-Front.php', 'selectedSeat=' + selectedSeat + '&nomPersonne=' + nomPersonne + '&prenomPersonne=' + prenomPersonne + '&mailPersonne=' + mailPersonne).done(function( data ) {
+                    resultRequest = data.statusRequest;
+                    returnMessage = data.message;
+
+                  if(resultRequest == true){
+                        //Affiche le message de confirmation de réservation si l'user a choisi des places
+                        $('#confirmReservation').show();
+                        $('#confirmReservation').append(returnMessage);
+                        $('#ValiderParticipation').hide();
+
+                    }else {
+
+                        $('#errorMessage').show();
+                        $('#errorMessage').append(returnMessage);
+                        $('#ValiderParticipation').hide();
+                   }
+
+            }, "json");
+
+
+
+
         //Appel la fonction "afficheBokkedSeats"
-        afficheBookedSeats();
-        
+        //afficheBookedSeats();
+
         /*setTimeout(function(){
             window.location.reload(true);
         }, 3000);*/
-        
+
 
     })
 

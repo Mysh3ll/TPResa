@@ -64,7 +64,28 @@ class Personne
 
         //}
     }
-    
+     /**
+     * REcuperation des logs d'une personne
+     */
+
+     public function getLogs(){
+         $mailUser = $this->mailPersonne;
+
+         $sql = " SELECT nomPersonne, PrenomPersonne FROM personne WHERE mailPersonne = : mailUser";
+
+         $reqnb = $this->cnx->prepare($sql);
+         $reqnb->bindParam(':mailUser',$mailUSer,PDO::PARAM_STR);
+         $reqnb->execute();
+
+         $tab = [];
+         if ($res = $reqnb->fecth(PDO::FETCH_OBJ) ){
+             $tab['nomPersonne'] = $res->nomPersonne;
+             $tab['prenomPersonne'] = $res->PrenomPersonne;
+         }
+         return $tab;
+
+     }
+
      /**
      * Méthode qui contrôle si la personne existe
      */
