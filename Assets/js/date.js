@@ -84,7 +84,7 @@ $(document).ready(function () {
         for (var i = 0; i < dateEvent.length; i++) {
             if ($.datepicker.formatDate("yy-mm-dd", date) == dateEvent[i]) {
                 if (nbPlaceEvent[i] == 0) {
-                    return [true, "eventNonDispo", typeEvent[i]+": "+titreEvent[i] + " est complet"];
+                    return [false, "eventComplet"];
                 }
                 else {
                     return [true, "eventOk", typeEvent[i] + " : " + titreEvent[i] + " est disponible"];

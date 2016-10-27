@@ -78,7 +78,7 @@ class Personne
          $reqnb->execute();
 
          $tab = [];
-         if ($res = $reqnb->fecth(PDO::FETCH_OBJ) ){
+         if ($res = $reqnb->fetch(PDO::FETCH_OBJ) ){
              $tab['nomPersonne'] = $res->nomPersonne;
              $tab['prenomPersonne'] = $res->PrenomPersonne;
          }
