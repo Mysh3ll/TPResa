@@ -58,7 +58,7 @@ $(document).ready(function () {
 
             });
 
-        currYear = $('.ui-datepicker-year'.html());
+        currYear = $('.ui-datepicker-year').html();
 
         $('#datepicker').datepicker("refresh");
     }, "json");
@@ -84,7 +84,7 @@ $(document).ready(function () {
         for (var i = 0; i < dateEvent.length; i++) {
             if ($.datepicker.formatDate("yy-mm-dd", date) == dateEvent[i]) {
                 if (nbPlaceEvent[i] == 0) {
-                    return [false, "eventComplet"];
+                    return [true, "eventNonDispo", typeEvent[i]+": "+titreEvent[i] + " est complet"];
                 }
                 else {
                     return [true, "eventOk", typeEvent[i] + " : " + titreEvent[i] + " est disponible"];
