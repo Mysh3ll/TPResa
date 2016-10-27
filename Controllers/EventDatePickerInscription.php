@@ -15,7 +15,8 @@ if(isset($_GET["dataSent"]))
 	$tabEvent = $Events->getListeEvent($_GET["dataSent"]);
 	$jsonDate = array();
 	foreach ($tabEvent as $event) {
-    	$jsonDate[] = array("dateEvent" => $event->dateEvent , 'titreEvent' => $event->titreEvent , 'nbPlaceEvent' => $event->nbPlaceEvent, 'libelleType' => $event->libelleType);
+        $nbPlaceRestante = $Events->getNbPlaceRestante($event->idEvent);
+    	$jsonDate[] = array("dateEvent" => $event->dateEvent , 'titreEvent' => $event->titreEvent , 'nbPlaceEvent' => $nbPlaceRestante, 'libelleType' => $event->libelleType);
 	}
 	echo json_encode($jsonDate);
 }
