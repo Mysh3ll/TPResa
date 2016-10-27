@@ -58,7 +58,7 @@ $(document).ready(function () {
 
             });
 
-        currYear = $('.ui-datepicker-year'.html());
+        currYear = $('.ui-datepicker-year').html();
 
         $('#datepicker').datepicker("refresh");
     }, "json");
