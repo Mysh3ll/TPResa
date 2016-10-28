@@ -56,6 +56,19 @@ include '../Assets/includes/backOffice/header-b.php';
                             </select>
                         </div>
                     </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="TypeSalle">Choix de la salle</label>
+                        <div class="col-md-4">
+                            <select id="TypeSalle" name="TypeSalle" class="form-control">
+                                <option value="0">-- Choisir une salle --</option>
+                                <option value="1">Salle 1</option>
+                                <option value="2">Salle 2</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <!-- PLUS BESOIN DE SAISIR LE NOMBRE DE PLACES
                     <!-- Text input
                     <div class="form-group">
@@ -127,7 +140,7 @@ include '../Assets/includes/backOffice/header-b.php';
                             </li>
                             <li class="seat seatAlone">
                                 <input type="checkbox" disabled id="1D"/>
-                                <label for="1D">Occupied</label>
+                                <label for="1D">1D</label>
                             </li>
                             <li class="seat seatAlone">
                                 <input type="checkbox" id="1E"/>
@@ -436,7 +449,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                     </li>
                                     <li class="seat seatLeft">
                                         <input type="checkbox" disabled id="1D"/>
-                                        <label for="1D">Occupied</label>
+                                        <label for="1D">1D</label>
                                     </li>
                                     <li class="seat seatLeft">
                                         <input type="checkbox" id="1E"/>
@@ -731,7 +744,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                     </li>
                                     <li class="seat seatCenter">
                                         <input type="checkbox" disabled id="1J"/>
-                                        <label for="1J">Occupied</label>
+                                        <label for="1J">1J</label>
                                     </li>
                                     <li class="seat seatCenter">
                                         <input type="checkbox" id="1K"/>
@@ -1030,7 +1043,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                     </li>
                                     <li class="seat seatRight">
                                         <input type="checkbox" disabled id="1Q"/>
-                                        <label for="1Q">Occupied</label>
+                                        <label for="1Q">1Q</label>
                                     </li>
                                     <li class="seat seatRight">
                                         <input type="checkbox" id="1R"/>

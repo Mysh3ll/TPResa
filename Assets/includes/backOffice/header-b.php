@@ -26,7 +26,7 @@
     <link href="../Assets/css/business-frontpage.css" rel="stylesheet">
 
     <!-- Seats CSS-->
-    <link href="../Assets/css/seat.css" rel="stylesheet">
+    <link href="../Assets/css/seatBackOffice.css" rel="stylesheet">
 
     <!-- DatePicker CSS-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
