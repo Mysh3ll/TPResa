@@ -11,6 +11,16 @@ include '../Assets/includes/backOffice/header-b.php';
     <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <?php
+            if (isset($message)) {
+                echo
+                    //<!-- Message -->
+                    "<div class='col-md-4 col-md-offset-4 alert alert-success fade in'>
+                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                         <strong>$message</strong>
+                    </div>";
+            }
+            ?>
             <form class="form-horizontal" action="CreationEvent.php" method="post" enctype="multipart/form-data">
                 <fieldset>
 
@@ -64,7 +74,7 @@ include '../Assets/includes/backOffice/header-b.php';
                         <div class="col-md-4">
                             <span class="fileinput-button">
                                 <i class="glyphicon glyphicon-plus"></i>
-                                <span >Choisissez un fichier</span>
+                                <span>Choisissez un fichier</span>
                                 <input type="file" size="32" name="uploadAffiche" value="">
                                 <input type="hidden" name="upload" value="simple"/>
                             </span>
@@ -80,17 +90,6 @@ include '../Assets/includes/backOffice/header-b.php';
                             </button>
                         </div>
                     </div>
-
-                    <?php
-                    if (isset($message)) {
-                        echo
-                            //<!-- Message -->
-                        "<div class='col-md-4 col-md-offset-4 alert alert-success fade in'>
-                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                            <strong>$message</strong>
-                        </div>";
-                    }
-                    ?>
 
                 </fieldset>
             </form>
