@@ -14,25 +14,32 @@ foreach ($tabEvent as $event) {
     $htmlSelectList .= '<option value=' . $event->idType . '>' . $event->libelleType . '</option>';
 }
 
+$tabSalles = $myEvent->getSalles();
+$selectListSalles = ' <option value="0">-- Choisir une salle --</option>';
+
+foreach ($tabSalles as $salle) {
+    $selectListSalles .= '<option value=' . $salle->idSalle . '>' . $salle->nomSalle . '</option>';
+}
 
 //On verifie que tous les champs ont été remplis, et que l'utilisateur a cliqué sur 'Valider'
-if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST['NbrePlace'], $_POST['ValiderCreationEvent'])) {
+if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST['TypeSalle'], $_POST['ValiderCreationEvent'])) {
 
     // on stocke dans des variables les infos rentrés par l'utilisateur
     $titre = $_POST['TitreEvent'];
     $date = $_POST['inputDate'];
     $type = $_POST['TypeEvent'];
-    $nbPlaces = $_POST['NbrePlace'];
+    $salle = $_POST['TypeSalle'];
+
 
     // si on inclue une affiche à l'événement
-    if (isset($_POST['upload'])) {
+    if ($_POST['upload'] != '' ) {
         // ---------- SIMPLE UPLOAD ----------
-
+            var_dump('TOTOTOOOOOOOOOOO');
         // we create an instance of the class, giving as argument the PHP object
         // corresponding to the file field from the form
         // All the uploads are accessible from the PHP object $_FILES
         $handle = new Upload($_FILES['uploadAffiche']);
-
+       
         // then we check if the file has been uploaded properly
         // in its *temporary* location in the server (often, it is /tmp)
         if ($handle->uploaded) {
@@ -57,7 +64,7 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
                 // everything was fine !
                 $path = $dir_dest. '/' . $handle->file_dst_name;
                 $eventToCreate = new Event();
-                $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $nbPlaces, $path);
+                $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle, $path);
 
                 $message = $returnInsertion;
                 // we delete the temporary files
@@ -76,7 +83,7 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
     } else {
         // si on n'inclue pas d'affiche à l'évènement
         $eventToCreate = new Event();
-        $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $nbPlaces);
+        $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle);
 
         $message = $returnInsertion;
     }

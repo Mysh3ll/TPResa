@@ -8,6 +8,7 @@ Autoloader::register();
  if (isset($_POST['ChoixEvent'], $_POST['ValiderChoixEvent'])) {
 	
 	$idEvent = $_POST['ChoixEvent'] ;
+
 	$_SESSION['idEvent'] = $idEvent;
 
 	$myEvent = new Event();
@@ -18,7 +19,9 @@ Autoloader::register();
 	//la methode getNbParticipants() renvoie le nb de participants à un evenement $idEvent
 	$nbParticipants = $myEvent->getNbParticipants($idEvent);
 
+
 	// On stocke dans des variables destinés à l'affichage dans la vue les infos de l'event contenues dans le tableau
+	$idSalle = $tabInfosEvent['idSalle'];
 	$titreEvent = $tabInfosEvent['titreEvent'];
 	$dateEvent  = $tabInfosEvent['dateEvent'];
 	$nbPlacesLeft = $tabInfosEvent['nbPlaceEventRestante'];

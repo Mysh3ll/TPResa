@@ -62,25 +62,10 @@ include '../Assets/includes/backOffice/header-b.php';
                         <label class="col-md-4 control-label" for="TypeSalle">Choix de la salle</label>
                         <div class="col-md-4">
                             <select id="TypeSalle" name="TypeSalle" class="form-control">
-                                <option value="0">-- Choisir une salle --</option>
-                                <option value="1">Salle 1</option>
-                                <option value="2">Salle 2</option>
+                                    <?php echo $selectListSalles ?>
                             </select>
                         </div>
                     </div>
-
-                    <!-- PLUS BESOIN DE SAISIR LE NOMBRE DE PLACES
-                    <!-- Text input
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="NbrePlace">Nombre de place</label>
-                        <div class="col-md-4">
-                            <input id="NbrePlace" name="NbrePlace" placeholder="Disponibilité"
-                                   class="form-control input-md"
-                                   required="" type="text">
-
-                        </div>
-                    </div>
-                    -->
 
                     <!-- Upload File -->
                     <div class="form-group">
@@ -90,7 +75,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>Choisissez un fichier</span>
                                 <input type="file" size="32" name="uploadAffiche" value="">
-                                <input type="hidden" name="upload" value="simple"/>
+                                <input type="hidden" name="upload" value=""/>
                             </span>
                         </div>
                     </div>

@@ -14,6 +14,8 @@ $(document).ready(function () {
     $('.salle2').hide();
     $('.salle1').hide();
 
+
+
     $('#TypeSalle').change(function () {
         var valueSelected = $(this).val();
         switch (valueSelected) {
