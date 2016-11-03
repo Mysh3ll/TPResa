@@ -41,7 +41,7 @@ class Event
 
     public function getListeEvent($currYear)
 	{
-		$s = "SELECT dateEvent,titreEvent,libelleType,nbPlaceEvent,idEvent FROM event,typeevent WHERE event.idType = typeevent.idType AND dateEvent BETWEEN :date1 AND :date2";
+		$s = "SELECT dateEvent,titreEvent,libelleType,idEvent FROM event,typeevent WHERE event.idType = typeevent.idType AND dateEvent BETWEEN :date1 AND :date2";
 		$val = array(":date1" => $currYear.'-01-01',
 					 ":date2" => $currYear.'-12-31'
 					 );
@@ -144,12 +144,17 @@ class Event
      */
     public function getNbPlaceRestanteJson($idEvent)
     {
-        $sqlNb = "SELECT nbPlaceEvent FROM event WHERE idEvent = :idEvent";
+        $sqlNb = "SELECT nbPlaces 
+                  FROM salle,event
+                  WHERE idEvent = :idEvent
+                  AND salle.idSalle = event.idSalle";
+
         $valNb = array("idEvent" => $idEvent);
         $reqNb = $this->cnx->prepare($sqlNb);
         $reqNb->execute($valNb);
+
         while ($repNb = $reqNb->fetch(PDO::FETCH_OBJ)) {
-            $nbrePlace['placeEvent'] = $repNb->nbPlaceEvent;
+            $nbrePlace['placeEvent'] = $repNb->nbPlaces;
         }
 
         echo json_encode($nbrePlace, JSON_UNESCAPED_UNICODE);
@@ -162,20 +167,20 @@ class Event
      */
     public function getNbPlaceReserveJson($idEvent)
     {
-        $sqlNb = "SELECT numPlaceAchete FROM participer WHERE idEvent = :idEvent";
+        $sqlNb = "SELECT numPlace FROM participer WHERE idEvent = :idEvent";
         $valNb = array("idEvent" => $idEvent);
         $reqNb = $this->cnx->prepare($sqlNb);
         $reqNb->execute($valNb);
         $i = 0;
         while ($repNb = $reqNb->fetch(PDO::FETCH_OBJ)) {
-            $nbrePlaceReserve['placeReserveEvent'][$i] = $repNb->numPlaceAchete;
+            $nbrePlaceReserve['placeReserveEvent'][$i] = $repNb->numPlace;
             $i++;
         }
 
         echo json_encode($nbrePlaceReserve, JSON_NUMERIC_CHECK);
     }
 
-    public function insertNewEvent($titre, $date, $type, $nbPlaces, $path = null)
+    public function insertNewEvent($titre, $date, $type, $salle, $path = null)
     {
 
         $returnMessage = '';
@@ -195,13 +200,13 @@ class Event
       
             $paramsEvent = array(':titre'    => $titre,
                                  ':dateE'    => $date,
-                                 ':nbPlaces' => $nbPlaces,
+                                 ':salle'    => $salle,
                                  ':type'     => $type,
-                                 ':path'     => $path
+                                 ':pathImg'  => $path
             );
 
-            $r = 'INSERT INTO event( titreEvent, dateEvent, nbPlaceEvent, idType, path)
-                  VALUES (:titre,:dateE,:nbPlaces,:type,:path)';
+            $r = 'INSERT INTO event( titreEvent, dateEvent,idType,path,idSalle)
+                  VALUES (:titre,:dateE,:type,:pathImg,:salle)';
 
             $ret = $this->cnx->prepare($r);
             $ret->execute($paramsEvent);
@@ -218,9 +223,10 @@ class Event
 
     public function getInfosEvent($idEvent)
     {
-    	$r = "SELECT titreEvent,nbPlaceEvent,dateEvent,libelleType
-    		  FROM event,typeevent
+    	$r = "SELECT titreEvent,dateEvent,libelleType,nbPlaces,salle.idSalle
+    		  FROM event,typeevent,salle
     		  WHERE idEvent = :idEvent
+              AND event.idSalle = salle.idSalle
     		  AND event.idType = typeevent.idType";
 
         $ret = $this->cnx->prepare($r);
@@ -231,11 +237,11 @@ class Event
         if ($o = $ret->fetch()){
             
             $nbParticipants = $this->getNbParticipants($idEvent);
-            
+            $tab['idSalle']       = $o->idSalle;
             $tab['titreEvent']    = $o->titreEvent;
             $tab['dateEvent']     = $o->dateEvent;
             $tab['typeEvent']     = $o->libelleType;
-            $tab['nbPlaceEventRestante']  = $o->nbPlaceEvent - $nbParticipants;
+            $tab['nbPlaceEventRestante']  = $o->nbPlaces - $nbParticipants;
         }
 
         return $tab;
@@ -245,7 +251,7 @@ class Event
     public function getNbParticipants($idEvent){
     	$nbParticipants = 0;
 
-        $sqlNbParticipants = "SELECT COUNT(numPlaceAchete) AS nbParticipants
+        $sqlNbParticipants = "SELECT COUNT(numPlace) AS nbParticipants
               FROM participer
               WHERE idEvent = :idEvent";
 
@@ -258,6 +264,7 @@ class Event
         }
         return $nbParticipants;
     }
+
      public function getIdEvent($dateEvent)
     {
         $s = "SELECT idEvent FROM event WHERE dateEvent = :dateEvent";
@@ -327,6 +334,24 @@ class Event
             $tabTypeEvent[] = $repEvent;
         }
         return $tabTypeEvent;
+    }
+
+
+    public function getSalles(){
+
+        $selectSalles = "SELECT idSalle,nomSalle,nbPlaces
+                        FROM salle
+                        ";
+
+        $request = $this->cnx->query($selectSalles);
+
+        $tabSalles = array();
+
+        while ($repEvent = $request->fetchObject())
+        {
+            $tabSalles[] = $repEvent;
+        }
+        return $tabSalles;
     }
 
     /**
