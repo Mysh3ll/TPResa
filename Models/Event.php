@@ -63,14 +63,15 @@ class Event
     public function getNbPlaceRestante($idEvent)
     {
         
-        $sqlNb = "SELECT nbPlaceEvent FROM event WHERE idEvent = :idEvent";
+        //$sqlNb = "SELECT nbPlaceEvent FROM event WHERE idEvent = :idEvent";
+        $sqlNb = "SELECT nbPlaces FROM salle,event WHERE salle.idSalle = event.idSalle AND idEvent = :idEvent";
         $valNb = array("idEvent" => $idEvent);
         $reqNb = $this->cnx->prepare($sqlNb);
         $reqNb->execute($valNb);
         
         if ($repNb = $reqNb->fetch(PDO::FETCH_OBJ)) { //Si evenement
             
-            $totalSeats = $repNb->nbPlaceEvent;
+            $totalSeats = $repNb->nbPlaces;
             $reservedSeats = $this->getNbParticipants($idEvent);
             $leftSeats = $totalSeats - $reservedSeats;
         }else{
