@@ -21,6 +21,11 @@ include '../Assets/includes/backOffice/header-b.php';
                     </div>";
             }
             ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
             <form class="form-horizontal" action="CreationEvent.php" method="post" enctype="multipart/form-data">
                 <fieldset>
 
@@ -62,7 +67,7 @@ include '../Assets/includes/backOffice/header-b.php';
                         <label class="col-md-4 control-label" for="TypeSalle">Choix de la salle</label>
                         <div class="col-md-4">
                             <select id="TypeSalle" name="TypeSalle" class="form-control">
-                                    <?php echo $selectListSalles ?>
+                                <?php echo $selectListSalles ?>
                             </select>
                         </div>
                     </div>

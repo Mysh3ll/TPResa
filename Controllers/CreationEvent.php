@@ -32,7 +32,7 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
 
 
     // si on inclue une affiche à l'événement
-    if ($_POST['upload'] != '' ) {
+    if (isset($_POST['upload'])) {
         // ---------- SIMPLE UPLOAD ----------
         // we create an instance of the class, giving as argument the PHP object
         // corresponding to the file field from the form
