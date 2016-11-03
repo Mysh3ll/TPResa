@@ -116,7 +116,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                 <label for="1C">1C</label>
                             </li>
                             <li class="seat seatAlone">
-                                <input type="checkbox" disabled id="1D"/>
+                                <input type="checkbox" id="1D"/>
                                 <label for="1D">1D</label>
                             </li>
                             <li class="seat seatAlone">

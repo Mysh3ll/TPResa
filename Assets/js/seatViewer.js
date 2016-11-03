@@ -25,9 +25,11 @@ viewBookedSeats = function () {
                 if (data) {
                     bookedSeats = data.placeReserveEvent; //si places reservées
                          for (var i = 0; i < bookedSeats.length ; i++) {
-                         	var placeHtmlCheckbox = $("#"+bookedSeats[i]);
-                         	var parentHtmlLi = placeHtmlCheckbox.parent();
-                         	parentHtmlLi.find('label').attr('disabled',true);    	
+                         	//var placeHtmlCheckbox = $("#"+bookedSeats[i]);
+                         	//var parentHtmlLi = placeHtmlCheckbox.parent();
+                         	//parentHtmlLi.find('label').attr('disabled',true);
+                             $("#"+bookedSeats[i]).prop('disabled', true); //permet de mettre en rouge les places
+                             // réservées
 				        }
 
                 } else {
