@@ -46,7 +46,7 @@ $(document).ready(function () {
                         //path
                         AfficheEvent = data.afficheEvent;
                         //changement de l'attribut "src" pour l'affichage de l'image
-                        $('#afficheEvent').attr("src", AfficheEvent);
+                        $('#afficheEvent').attr("src", "../Assets/images/affiche"+AfficheEvent);
 
                     }, "json")
                 },
