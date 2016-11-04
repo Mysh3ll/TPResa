@@ -41,7 +41,8 @@ class Event
 
     public function getListeEvent($currYear)
 	{
-		$s = "SELECT dateEvent,titreEvent,libelleType,idEvent FROM event,typeevent WHERE event.idType = typeevent.idType AND dateEvent BETWEEN :date1 AND :date2";
+		$s = "SELECT dateEvent,titreEvent,libelleType,idEvent,nbPlaces FROM event,typeevent,salle WHERE event.idType = 
+		typeevent.idType AND event.idSalle = salle.idSalle AND dateEvent BETWEEN :date1 AND :date2";
 		$val = array(":date1" => $currYear.'-01-01',
 					 ":date2" => $currYear.'-12-31'
 					 );
@@ -387,12 +388,12 @@ class Event
 
 	public function affichePersonneEvent($dateEvent)
 	{
-		$s = "SELECT nomPersonne,prenomPersonne,mailPersonne,participer.idPersonne,count(numPlaceAchete) as nbPlaceAchete
+		$s = "SELECT nomPersonne,PrenomPersonne,mailPersonne,participer.idPersonne,count(numPlace) as nbPlaceAchete
 			  FROM event,participer,personne 
 			  WHERE participer.idEvent = event.idEvent
 			  AND participer.idPersonne = personne.idPersonne 
 			  AND dateEvent = :dateEvent 
-			  GROUP BY nomPersonne,prenomPersonne,mailPersonne,participer.idPersonne";
+			  GROUP BY nomPersonne,PrenomPersonne,mailPersonne,participer.idPersonne";
 		$val = array(':dateEvent' => $dateEvent);
 		$r = $this->cnx->prepare($s);
 		$r->execute($val);
