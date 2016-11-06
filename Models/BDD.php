@@ -37,7 +37,7 @@ class BDD
     /**
      * @const PARAM_db_pass Mot de passe du user
      */
-    const PARAM_db_pass = 'mysh3ll';
+    const PARAM_db_pass = 'root';
 
     /**
      * BDD constructor.
