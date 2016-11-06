@@ -80,7 +80,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>Choisissez un fichier</span>
                                 <input type="file" size="32" name="uploadAffiche" value="">
-                                <input type="hidden" name="upload" value=""/>
+                                <input type="hidden" name="upload" value="simple"/>
                             </span>
                         </div>
                     </div>

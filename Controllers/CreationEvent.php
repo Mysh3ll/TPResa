@@ -32,13 +32,14 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
 
 
     // si on inclue une affiche à l'événement
-    if (isset($_POST['upload'])) {
+    if (isset($_POST['uploadAffiche'])) {
+
         // ---------- SIMPLE UPLOAD ----------
         // we create an instance of the class, giving as argument the PHP object
         // corresponding to the file field from the form
         // All the uploads are accessible from the PHP object $_FILES
         $handle = new Upload($_FILES['uploadAffiche']);
-       
+
         // then we check if the file has been uploaded properly
         // in its *temporary* location in the server (often, it is /tmp)
         if ($handle->uploaded) {
@@ -72,6 +73,7 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
             } else {
                 // one error occured
                 $message = "Erreur lors de l'upload: " . $handle->error . '';
+
             }
 
         } else {
