@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 20 Octobre 2016 à 19:20
+-- Généré le :  Jeu 03 Novembre 2016 à 09:51
 -- Version du serveur :  5.6.20-log
 -- Version de PHP :  5.5.15
 
@@ -30,8 +30,9 @@ CREATE TABLE IF NOT EXISTS `event` (
 `idEvent` int(11) NOT NULL,
   `titreEvent` varchar(25) DEFAULT NULL,
   `dateEvent` date DEFAULT NULL,
-  `nbPlaceEvent` int(11) DEFAULT NULL,
-  `idType` int(11) DEFAULT NULL
+  `idType` int(11) DEFAULT NULL,
+  `idSalle` int(255) NOT NULL,
+  `path` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
@@ -41,10 +42,9 @@ CREATE TABLE IF NOT EXISTS `event` (
 --
 
 CREATE TABLE IF NOT EXISTS `participer` (
-  `nbPlaceAchetees` int(11) DEFAULT NULL,
   `idEvent` int(11) NOT NULL,
   `idPersonne` int(11) NOT NULL,
-  `numPlaceAchete` int(11) NOT NULL
+  `numPlace` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -58,7 +58,27 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `nomPersonne` varchar(25) DEFAULT NULL,
   `PrenomPersonne` varchar(25) DEFAULT NULL,
   `mailPersonne` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `salle`
+--
+
+CREATE TABLE IF NOT EXISTS `salle` (
+`idSalle` int(255) NOT NULL,
+  `nbPlaces` int(255) NOT NULL,
+  `nomSalle` varchar(255) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `salle`
+--
+
+INSERT INTO `salle` (`idSalle`, `nbPlaces`, `nomSalle`) VALUES
+(1, 60, 'Moyenne'),
+(2, 180, 'Grande');
 
 -- --------------------------------------------------------
 
@@ -88,19 +108,25 @@ INSERT INTO `typeevent` (`idType`, `libelleType`) VALUES
 -- Index pour la table `event`
 --
 ALTER TABLE `event`
- ADD PRIMARY KEY (`idEvent`), ADD KEY `FK_Event_idType` (`idType`);
+ ADD PRIMARY KEY (`idEvent`), ADD KEY `FK_Event_idType` (`idType`), ADD KEY `FK_Event_idSalle` (`idSalle`);
 
 --
 -- Index pour la table `participer`
 --
 ALTER TABLE `participer`
- ADD PRIMARY KEY (`idEvent`,`idPersonne`,`numPlaceAchete`), ADD KEY `FK_Participer_idPersonne` (`idPersonne`);
+ ADD PRIMARY KEY (`idEvent`,`idPersonne`,`numPlace`), ADD KEY `FK_Participer_idPersonne` (`idPersonne`);
 
 --
 -- Index pour la table `personne`
 --
 ALTER TABLE `personne`
  ADD PRIMARY KEY (`idPersonne`);
+
+--
+-- Index pour la table `salle`
+--
+ALTER TABLE `salle`
+ ADD PRIMARY KEY (`idSalle`);
 
 --
 -- Index pour la table `typeevent`
@@ -121,7 +147,12 @@ MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `salle`
+--
+ALTER TABLE `salle`
+MODIFY `idSalle` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `typeevent`
 --
@@ -135,7 +166,8 @@ MODIFY `idType` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- Contraintes pour la table `event`
 --
 ALTER TABLE `event`
-ADD CONSTRAINT `FK_Event_idType` FOREIGN KEY (`idType`) REFERENCES `typeevent` (`idType`);
+ADD CONSTRAINT `FK_Event_idType` FOREIGN KEY (`idType`) REFERENCES `typeevent` (`idType`),
+ADD CONSTRAINT `FK_event_idSalle` FOREIGN KEY (`idSalle`) REFERENCES `salle` (`idSalle`);
 
 --
 -- Contraintes pour la table `participer`

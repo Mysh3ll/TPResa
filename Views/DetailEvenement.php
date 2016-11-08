@@ -11,6 +11,20 @@ include '../Assets/includes/backOffice/header-b.php';
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <?php
+            if (isset($message)) {
+                echo
+                    //<!-- Message -->
+                "<div class='col-md-4 col-md-offset-4 alert alert-success fade in'>
+                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                         <strong>$message</strong>
+                    </div>";
+            }
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
             <form class="form-horizontal">
                 <fieldset>
 
@@ -70,11 +84,7 @@ include '../Assets/includes/backOffice/header-b.php';
                         </div>
                     </div>
                     
-                            <div class="form-group">
-                                <h1> Places réservées et disponibles sur l'évènement</h1>
-                                <hr>
-                                
-                            </div>
+
                   
 
                     <!-- Button -->
@@ -88,6 +98,28 @@ include '../Assets/includes/backOffice/header-b.php';
                 </fieldset>
             </form>
         </div>
+
+        <div class="col-lg-6" >
+         <legend><h2> Une petite idée de ce qui vous attend... </h2></legend>
+        <?php 
+            if($videoId != null){
+        ?>
+            <iframe width='540' height='380' src="https://www.youtube.com/embed/<?php echo $videoId ?>"></iframe>
+        
+
+        <?php }else{
+        ?>
+            <p> Nous n'avons pas trouvé de videos relatives à cet événement !
+        <?php
+            } 
+        ?>
+        </div>
+        <div class="col-lg-12">
+
+            <h1> Places réservées et disponibles sur l'évènement</h1>
+            <hr>
+        </div>
+
     <div class="row">
         <div class="col-lg-12">
             <!-- SALLE #1 -->
