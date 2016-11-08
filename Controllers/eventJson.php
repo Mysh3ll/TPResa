@@ -17,7 +17,7 @@ else
 	$jsonDate = array();
 	foreach ($tabEvent as $event) {
 		$nbParticipant = $events->getNbPlaceAchete($event->dateEvent);
-	    $jsonDate[] = array("dateEvent" => $event->dateEvent , 'titreEvent' => $event->titreEvent, 'libelleType' => $event->libelleType, 'nbPlaceEvent' => $event->nbPlaceEvent, 'nbParticipant' => $nbParticipant);
+	    $jsonDate[] = array("dateEvent" => $event->dateEvent , 'titreEvent' => $event->titreEvent, 'libelleType' => $event->libelleType, 'nbPlaceEvent' => $event->nbPlaces, 'nbParticipant' => $nbParticipant);
 	}
 	echo json_encode($jsonDate);
 

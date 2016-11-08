@@ -32,9 +32,8 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
 
 
     // si on inclue une affiche à l'événement
-    if ($_POST['upload'] != '' ) {
+    if (isset($_POST['upload'])) {
         // ---------- SIMPLE UPLOAD ----------
-            var_dump('TOTOTOOOOOOOOOOO');
         // we create an instance of the class, giving as argument the PHP object
         // corresponding to the file field from the form
         // All the uploads are accessible from the PHP object $_FILES
@@ -62,7 +61,8 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
             // we check if everything went OK
             if ($handle->processed) {
                 // everything was fine !
-                $path = $dir_dest. '/' . $handle->file_dst_name;
+                //$path = $dir_dest. '/' . $handle->file_dst_name;
+                $path = $handle->file_dst_name;
                 $eventToCreate = new Event();
                 $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle, $path);
 

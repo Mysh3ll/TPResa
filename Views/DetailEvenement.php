@@ -116,7 +116,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                 <label for="1C">1C</label>
                             </li>
                             <li class="seat seatAlone">
-                                <input type="checkbox" disabled id="1D"/>
+                                <input type="checkbox" id="1D"/>
                                 <label for="1D">1D</label>
                             </li>
                             <li class="seat seatAlone">
@@ -425,7 +425,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                         <label for="1C">1C</label>
                                     </li>
                                     <li class="seat seatLeft">
-                                        <input type="checkbox" disabled id="1D"/>
+                                        <input type="checkbox" id="1D"/>
                                         <label for="1D">1D</label>
                                     </li>
                                     <li class="seat seatLeft">
@@ -720,7 +720,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                         <label for="1I">1I</label>
                                     </li>
                                     <li class="seat seatCenter">
-                                        <input type="checkbox" disabled id="1J"/>
+                                        <input type="checkbox" id="1J"/>
                                         <label for="1J">1J</label>
                                     </li>
                                     <li class="seat seatCenter">
@@ -1019,7 +1019,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                         <label for="1P">1P</label>
                                     </li>
                                     <li class="seat seatRight">
-                                        <input type="checkbox" disabled id="1Q"/>
+                                        <input type="checkbox" id="1Q"/>
                                         <label for="1Q">1Q</label>
                                     </li>
                                     <li class="seat seatRight">

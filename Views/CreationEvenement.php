@@ -21,6 +21,11 @@ include '../Assets/includes/backOffice/header-b.php';
                     </div>";
             }
             ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
             <form class="form-horizontal" action="CreationEvent.php" method="post" enctype="multipart/form-data">
                 <fieldset>
 
@@ -62,7 +67,7 @@ include '../Assets/includes/backOffice/header-b.php';
                         <label class="col-md-4 control-label" for="TypeSalle">Choix de la salle</label>
                         <div class="col-md-4">
                             <select id="TypeSalle" name="TypeSalle" class="form-control">
-                                    <?php echo $selectListSalles ?>
+                                <?php echo $selectListSalles ?>
                             </select>
                         </div>
                     </div>
@@ -124,7 +129,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                 <label for="1C">1C</label>
                             </li>
                             <li class="seat seatAlone">
-                                <input type="checkbox" disabled id="1D"/>
+                                <input type="checkbox" id="1D"/>
                                 <label for="1D">1D</label>
                             </li>
                             <li class="seat seatAlone">
@@ -433,7 +438,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                         <label for="1C">1C</label>
                                     </li>
                                     <li class="seat seatLeft">
-                                        <input type="checkbox" disabled id="1D"/>
+                                        <input type="checkbox" id="1D"/>
                                         <label for="1D">1D</label>
                                     </li>
                                     <li class="seat seatLeft">
@@ -728,7 +733,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                         <label for="1I">1I</label>
                                     </li>
                                     <li class="seat seatCenter">
-                                        <input type="checkbox" disabled id="1J"/>
+                                        <input type="checkbox" id="1J"/>
                                         <label for="1J">1J</label>
                                     </li>
                                     <li class="seat seatCenter">
@@ -1027,7 +1032,7 @@ include '../Assets/includes/backOffice/header-b.php';
                                         <label for="1P">1P</label>
                                     </li>
                                     <li class="seat seatRight">
-                                        <input type="checkbox" disabled id="1Q"/>
+                                        <input type="checkbox" id="1Q"/>
                                         <label for="1Q">1Q</label>
                                     </li>
                                     <li class="seat seatRight">
