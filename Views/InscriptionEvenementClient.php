@@ -10,7 +10,7 @@ include '../Assets/includes/frontOffice/header-f.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <form id="inscriptionEvent" class="form-horizontal" method="post">
+                <form id="inscriptionEvent" class="form-horizontal" method="post" >
                     <fieldset>
 
                         <!-- Form Name -->
@@ -77,7 +77,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                                                 </li>
                                                 <li class="seat seatAlone">
                                                     <input type="checkbox" id="1D"/>
-                                                    <label for="1D">Occupied</label>
+                                                    <label for="1D">1D</label>
                                                 </li>
                                                 <li class="seat seatAlone">
                                                     <input type="checkbox" id="1E"/>
@@ -386,7 +386,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                                                         </li>
                                                         <li class="seat seatLeft">
                                                             <input type="checkbox" id="1D"/>
-                                                            <label for="1D">Occupied</label>
+                                                            <label for="1D">1D</label>
                                                         </li>
                                                         <li class="seat seatLeft">
                                                             <input type="checkbox" id="1E"/>
@@ -681,7 +681,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                                                         </li>
                                                         <li class="seat seatCenter">
                                                             <input type="checkbox" id="1J"/>
-                                                            <label for="1J">Occupied</label>
+                                                            <label for="1J">1J</label>
                                                         </li>
                                                         <li class="seat seatCenter">
                                                             <input type="checkbox" id="1K"/>
@@ -980,7 +980,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                                                         </li>
                                                         <li class="seat seatRight">
                                                             <input type="checkbox" id="1Q"/>
-                                                            <label for="1Q">Occupied</label>
+                                                            <label for="1Q">1Q</label>
                                                         </li>
                                                         <li class="seat seatRight">
                                                             <input type="checkbox" id="1R"/>
@@ -1278,8 +1278,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                         <label class="col-md-4 control-label" for="ValiderEvent"></label>
                         <div class="col-md-8">
                             <input id="ValiderParticipation" name="ValiderParticipation" type="submit"
-                                   class="btn btn-success" /
-                            >
+                                   class="btn btn-success" />
                             <a href="../Controllers/ListeEventClient.php" class="btn btn-danger"
                                role="button">Retour</a>
                         </div>

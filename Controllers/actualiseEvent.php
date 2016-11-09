@@ -10,10 +10,12 @@ Autoloader::register();
             
            $event = new Event();
            $idEvent = $event->getIdEvent($_POST['datePicked']);
+           $idSalle = $event->getIdSalle($_POST['datePicked']);
+           $nbPlacesSalle = $event->getNbPlaces($idSalle);
+           $dataEvent = json_encode(array( "idEvent" => $idEvent, "idSalle" => $idSalle, "nbPlacesSalle" => $nbPlacesSalle));
            $_SESSION['idEvent'] = $idEvent;
-                 
+           $_SESSION['dataEvent'] = $dataEvent;
            include "../Views/InscriptionEvenementClient.php";
-
         }else{
             header( "Location:ListeEventClient.php" ); 
         }
