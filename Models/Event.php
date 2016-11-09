@@ -278,6 +278,28 @@ class Event
             return $rep->idEvent;
         }
     }
+    public function getIdSalle($dateEvent)
+    {
+        $s = "SELECT idSalle FROM event WHERE dateEvent = :dateEvent";
+        $val = array("dateEvent" => $dateEvent);
+        $r = $this->cnx->prepare($s);
+        $r->execute($val);
+        while($rep = $r->fetch(PDO::FETCH_OBJ))
+        {
+            return $rep->idSalle;
+        }
+    }
+    public function getNbPlaces($idSalle)
+    {
+        $s = "SELECT nbPlaces FROM salle WHERE idSalle = :idSalle";
+        $val = array("idSalle" => $idSalle);
+        $r = $this->cnx->prepare($s);
+        $r->execute($val);
+        while($rep = $r->fetch(PDO::FETCH_OBJ))
+        {
+            return $rep->nbPlaces;
+        }
+    }
 
     public function getTitreEvent($idEvent)
     {
