@@ -35,6 +35,9 @@
 <!-- Main JS -->
 <script src="../Assets/js/main.js"></script>
 
+<!-- Modif Event Client JS -->
+<script src="../Assets/js/ModifEventClient.js"></script>
+
 <!-- JS seatviewer -->
 <script type='text/javascript' src='../Assets/js/seatViewer-f.js'></script>
 </body>
