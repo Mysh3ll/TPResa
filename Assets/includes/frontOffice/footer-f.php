@@ -35,6 +35,8 @@
 <!-- Main JS -->
 <script src="../Assets/js/main.js"></script>
 
+<!-- JS seatviewer -->
+<script type='text/javascript' src='../Assets/js/seatViewer-f.js'></script>
 </body>
 
 </html>

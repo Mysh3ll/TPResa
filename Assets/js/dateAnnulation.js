@@ -63,16 +63,24 @@ $(document).ready(function () {
                         (function (i) {
                             for (var i = 0; i < imax; i++) {
                                 $('#idPersonne' + i).on('click', function () {
-                                    var idPersonne = $(this).attr('value');
-                                    $(this).attr('id');
-                                    var numRow = $(this).attr('id').match(/[0-9]/);
-                                    $.get('eventJsonChange.php?idPersonne=' + idPersonne, function () {
-                                        $('#tr' + numRow).remove();
-                                        if ($('#tbody').find("tr").length === 0) {
-                                            $('#personne').hide();
-                                            $('#eventVide').show();
-                                            $('#eventVide').append('Cet évènement n\' a pas encore de participant');
-                                        }
+                                    var id = $(this);
+                                    //ouverture du modal de confirmation
+                                    $("#myModal").modal();
+                                    //Action effectuée après avoir confirmer la suppression dans le modal
+                                    $("#modalConfirmAnnulation").on('click', function () {
+                                        var idPersonne = $(id).attr('value');
+                                        $(id).attr('id');
+                                        var numRow = $(id).attr('id').match(/[0-9]/);
+                                        $.get('eventJsonChange.php?idPersonne=' + idPersonne, function () {
+                                            $('#tr' + numRow).remove();
+                                            if ($('#tbody').find("tr").length === 0) {
+                                                $('#personne').hide();
+                                                $('#eventVide').show();
+                                                $('#eventVide').append('Cet évènement n\' a pas encore de participant');
+                                            }
+                                            //fermeture du modal de confirmation
+                                            $('#myModal').modal('toggle');
+                                        })
                                     })
                                 })
                             }

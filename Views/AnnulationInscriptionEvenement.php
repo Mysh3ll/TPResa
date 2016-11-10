@@ -7,6 +7,38 @@
  */
 include '../Assets/includes/backOffice/header-b.php';
 ?>
+    <!-- Confirm Modal -->
+    <div class="container">
+        <div class="row">
+            <div id="myModal" class="modal fade in">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a class="btn btn-default" data-dismiss="modal"><span
+                                    class="glyphicon glyphicon-remove"></span></a>
+                            <h4 class="modal-title">ATTENTION</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Confirmation de suppression</h4>
+                            <p>Cette opération est irréversible, veuillez confirmer votre choix.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-danger" data-dismiss="modal"><span
+                                        class="glyphicon glyphicon-remove"></span> Annuler
+                                </button>
+                                <button id="modalConfirmAnnulation" class="btn btn-primary"><span class="glyphicon
+                                glyphicon-check"></span>
+                                    Confirmer
+                                </button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dalog -->
+            </div><!-- /.modal -->
+        </div>
+    </div>
+
     <!-- Page Content -->
     <div class="container">
         <div class="row">

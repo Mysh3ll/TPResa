@@ -71,10 +71,10 @@ class Personne
      public function getLogs(){
          $mailUser = $this->mailPersonne;
 
-         $sql = " SELECT nomPersonne, PrenomPersonne FROM personne WHERE mailPersonne = : mailUser";
+         $sql = " SELECT nomPersonne, PrenomPersonne FROM personne WHERE mailPersonne = :mailUser";
 
          $reqnb = $this->cnx->prepare($sql);
-         $reqnb->bindParam(':mailUser',$mailUSer,PDO::PARAM_STR);
+         $reqnb->bindParam(':mailUser',$mailUser,PDO::PARAM_STR);
          $reqnb->execute();
 
          $tab = [];
