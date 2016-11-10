@@ -7,8 +7,8 @@
  */
 include '../Assets/includes/backOffice/header-b.php';
 ?>
-<!-- Page Content -->
-<div class="container">
+    <!-- Page Content -->
+    <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <?php
@@ -24,101 +24,83 @@ include '../Assets/includes/backOffice/header-b.php';
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
-            <form class="form-horizontal">
-                <fieldset>
+    <div class="col-lg-12">
+        <form class="form-horizontal">
+            <fieldset>
 
-                    <!-- Form Name -->
-                    <legend><h1>Détail de l'événement</h1></legend>
+                <!-- Form Name -->
+                <legend><h1>Détail de l'événement</h1></legend>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="TitreEvent">Nom de l'événement</label>
-                        <div class="col-md-4">
-                            <input disabled id="TitreEvent" name="TitreEvent" placeholder="" class="form-control input-md"
-                                   type="text" value=" <?php echo $titreEvent ?> ">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="TitreEvent">Nom de l'événement</label>
+                    <div class="col-md-4">
+                        <input disabled id="TitreEvent" name="TitreEvent" placeholder="" class="form-control input-md"
+                               type="text" value=" <?php echo $titreEvent ?> ">
 
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="TypeEvent">Type de l'événement</label>
-                        <div class="col-md-4">
-                            <input disabled id="TypeEvent" name="TypeEvent" placeholder="" class="form-control input-md"
-                                   type="text" value= "<?php echo $typeEvent ?>">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="TypeEvent">Type de l'événement</label>
+                    <div class="col-md-4">
+                        <input disabled id="TypeEvent" name="TypeEvent" placeholder="" class="form-control input-md"
+                               type="text" value="<?php echo $typeEvent ?>">
 
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="DateEvent">Date de l'événement</label>
-                        <div class="col-md-4">
-                            <input disabled id="DateEvent" name="DateEvent" placeholder="" class="form-control input-md"
-                                   type="text" value= "<?php echo $dateEvent ?>">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="DateEvent">Date de l'événement</label>
+                    <div class="col-md-4">
+                        <input disabled id="DateEvent" name="DateEvent" placeholder="" class="form-control input-md"
+                               type="text" value="<?php echo $dateEvent ?>">
 
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="NbrePlacesRestantes">Nombre de places
-                            restantes</label>
-                        <div class="col-md-4">
-                            <input disabled id="NbrePlacesRestantes" id="NbrePlacesRestantes" name="NbrePlacesRestantes" placeholder=""
-                                   class="form-control input-md"
-                                   type="text" value= "<?php echo $nbPlacesLeft ?>">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="NbrePlacesRestantes">Nombre de places
+                        restantes</label>
+                    <div class="col-md-4">
+                        <input disabled id="NbrePlacesRestantes" id="NbrePlacesRestantes" name="NbrePlacesRestantes"
+                               placeholder=""
+                               class="form-control input-md"
+                               type="text" value="<?php echo $nbPlacesLeft ?>">
 
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="NbreParticipants">Nombre de participants</label>
-                        <div class="col-md-4">
-                            <input disabled id="NbreParticipants" name="NbreParticipants" placeholder=""
-                                   class="form-control input-md"
-                                   type="text" value="<?php echo $nbParticipants ?>">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="NbreParticipants">Nombre de participants</label>
+                    <div class="col-md-4">
+                        <input disabled id="NbreParticipants" name="NbreParticipants" placeholder=""
+                               class="form-control input-md"
+                               type="text" value="<?php echo $nbParticipants ?>">
 
-                        </div>
                     </div>
-                    
+                </div>
 
-                  
-
-                    <!-- Button -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="Retour"></label>
-                        <div class="col-md-4">
-                            <a href="../Controllers/ListeEvent.php" class="btn btn-info" role="button">Retour</a>
-                        </div>
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Retour"></label>
+                    <div class="col-md-4">
+                        <a href="../Controllers/ListeEvent.php" class="btn btn-info" role="button">Retour</a>
                     </div>
-                    <input hidden id="typeSalle" name ="typeSalle" value ="<?php echo $idSalle ?>"/>
-                </fieldset>
-            </form>
-        </div>
+                </div>
+                <input hidden id="typeSalle" name="typeSalle" value="<?php echo $idSalle ?>"/>
+            </fieldset>
+        </form>
+    </div>
 
-        <div class="col-lg-6" >
-         <legend><h2> Une petite idée de ce qui vous attend... </h2></legend>
-        <?php 
-            if($videoId != null){
-        ?>
-            <iframe width='540' height='380' src="https://www.youtube.com/embed/<?php echo $videoId ?>"></iframe>
-        
-
-        <?php }else{
-        ?>
-            <p> Nous n'avons pas trouvé de videos relatives à cet événement !
-        <?php
-            } 
-        ?>
-        </div>
-        <div class="col-lg-12">
-
-            <h1> Places réservées et disponibles sur l'évènement</h1>
-            <hr>
-        </div>
+    <div class="col-lg-12">
+        <h1> Places réservées et disponibles sur l'évènement</h1>
+        <hr>
+    </div>
 
     <div class="row">
         <div class="col-lg-12">

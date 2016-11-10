@@ -32,7 +32,7 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
 
 
     // si on inclue une affiche à l'événement
-    if (isset($_POST['uploadAffiche'])) {
+    if (isset($_POST['upload'])) {
 
         // ---------- SIMPLE UPLOAD ----------
         // we create an instance of the class, giving as argument the PHP object
@@ -77,17 +77,12 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
             }
 
         } else {
-            // if we're here, the upload file failed for some reasons
-            // i.e. the server didn't receive the file
-            $message = "Erreur lors de l'upload: " . $handle->error . '';
+            // si on n'inclue pas d'affiche à l'évènement
+            $eventToCreate = new Event();
+            $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle);
+
+            $message = $returnInsertion;
         }
-
-    } else {
-        // si on n'inclue pas d'affiche à l'évènement
-        $eventToCreate = new Event();
-        $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle);
-
-        $message = $returnInsertion;
     }
 }
 

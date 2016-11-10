@@ -13,7 +13,7 @@ if (isset($_GET['dateChoisie'])) {
     foreach ($tabPersonne as $personne) {
         $tableauHTML[] = "<tr id='tr$i'>
 							  <td>$personne->nomPersonne</td>
-							  <td>$personne->prenomPersonne</td>
+							  <td>$personne->PrenomPersonne</td>
 							  <td>$personne->mailPersonne</td>
 							  <td>$personne->nbPlaceAchete</td>
 							  <td><p data-placement='top' data-toggle='tooltip' title='Supprimer'><button id='idPersonne$i' value='$personne->idPersonne' class='btn btn-danger btn - xs' data-title='Supprimer'><span class='glyphicon glyphicon-trash'></span></button></p></td>
