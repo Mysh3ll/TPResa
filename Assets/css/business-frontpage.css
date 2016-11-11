@@ -32,7 +32,7 @@ body {
 
 /* Image des cercles */
 
-.img1, .img2, .admin, .user, .cancel {
+.img1, .img2, .admin, .user, .cancel, .modif {
     height: 200px;
     width: 200px;
     -moz-box-shadow: 0px 0px 10px #343434;
@@ -47,7 +47,7 @@ body {
     filter: alpha(opacity=100);
 }
 
-.img1:hover, .img2:hover, .admin:hover, .user:hover, .cancel:hover {
+.img1:hover, .img2:hover, .admin:hover, .user:hover, .cancel:hover, .modif:hover {
     opacity: 0.3;
     filter: alpha(opacity=30);
     cursor: pointer;
@@ -71,6 +71,10 @@ body {
 
 .user {
     background: url('../images/user.png') center center no-repeat scroll;
+}
+
+.modif {
+    background: url('../images/edit.png') center center no-repeat scroll;
 }
 
 footer {

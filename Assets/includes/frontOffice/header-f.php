@@ -62,6 +62,9 @@
                 <li>
                     <a href="../Controllers/ListeEventClient.php">Liste des événements</a>
                 </li>
+                <li>
+                    <a href="../Controllers/DemandeModifEventClient.php">Modifier mes places</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
