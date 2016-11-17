@@ -13,9 +13,13 @@ $(document).ready(function () {
     //set variable path de l'affiche
     var AfficheEvent;
     var currYear;
+    var idVideo;
+
 
 
     $("#ValiderEvent").hide();
+    $('#afficheEvent').hide();
+    $('#videoEvent').hide();
 
     $.get("../Controllers/EventDatePicker-f.php", function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -44,9 +48,22 @@ $(document).ready(function () {
                     $.get("../Controllers/AfficheDatePicker-f.php?dataSent=" + dateChoisie, function (data) {
 
                         //path
+                        console.log(data);
                         AfficheEvent = data.afficheEvent;
-                        //changement de l'attribut "src" pour l'affichage de l'image
-                        $('#afficheEvent').attr("src", "../Assets/images/affiche/"+AfficheEvent);
+                        idVideo      = data.urlVideo;
+
+                        if(AfficheEvent != null){
+                            //changement de l'attribut "src" pour l'affichage de l'image
+                            $('#afficheEvent').attr("src", "../Assets/images/affiche/"+AfficheEvent).show();
+                        }else{
+                            $('#afficheEvent').hide();
+                        }
+                        
+                        if(idVideo != null){
+                            $('#videoEvent').attr("src","https://www.youtube.com/embed/"+idVideo).show();
+                        }else{
+                             $('#videoEvent').hide();
+                        }
 
                     }, "json")
                 },

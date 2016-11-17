@@ -28,6 +28,10 @@ include '../Assets/includes/frontOffice/header-f.php';
                                     <img id="afficheEvent" src="" alt="" class="img-responsive">
                                 </div>
 
+                                <div>
+                                    <iframe id="videoEvent" src=""> </iframe>
+                                </div>
+
                                 <input type="text" hidden="true" name="datePicked" id="datePicked"/>
                             </div>
 

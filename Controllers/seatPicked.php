@@ -12,9 +12,13 @@ if(isset($_GET['nomPersonne']))
 	$prenomPersonne = $_GET['prenomPersonne'];
 	$mailPersonne = $_GET['mailPersonne'];	
 	$placesAchetees = $_GET['placesAchetees'];
+
+	$dateTime = new DateTime();
+	$todayDate = $dateTime->format('Y-m-d H:i:s');
+
 	$tabPlacesAchetees = explode(",", $placesAchetees);
 	//Instanciation de l'objet Personne
-	$Personne = new Personne($mailPersonne, $nomPersonne, $prenomPersonne);
+	$Personne = new Personne($mailPersonne, $nomPersonne, $prenomPersonne,$todayDate);
 	//On utilise la methode isMailAvailable sur l'objet Personne pour vérifier la disponibilité du mail
 	$isMailAvailable = $Personne->isMailAvailable();
 

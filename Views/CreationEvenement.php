@@ -79,9 +79,17 @@ include '../Assets/includes/backOffice/header-b.php';
                             <span class="fileinput-button">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <span>Choisissez un fichier</span>
-                                <input type="file" size="32" name="uploadAffiche" value="">
+                                <input type="file" size="32" name="uploadAffiche" value="" />
                                 <input type="hidden" name="upload" value="simple"/>
                             </span>
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="videoEvent">Sélection d'une vidéo</label>
+                        <div class="col-md-4">
+                            <input id="videoEvent" name="videoEvent" class="form-control" type="text" placeholder="Entrez l'URL complet de la video youtube"/>
                         </div>
                     </div>
 

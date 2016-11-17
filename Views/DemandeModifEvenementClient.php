@@ -10,18 +10,30 @@ include '../Assets/includes/frontOffice/header-f.php';
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            <?php
+            if (isset($message)) {
+                echo
+                    //<!-- Message -->
+                "<div class='col-md-4 col-md-offset-4 alert alert-success fade in'>
+                         <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                         <strong>$message</strong>
+                    </div>";
+            }
+            ?>
+        </div>
+        <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="form-horizontal" action="../Controllers/????.php" method="post">
+                    <form class="form-horizontal" action="../Controllers/DemandeModifEventClient.php" method="post">
                         <fieldset>
                             <!-- Form Name -->
                             <legend><h1>Demande de modification des places</h1></legend>
 
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="mailUser">Adresse e-mail</label>
+                                <label class="col-md-4 control-label" for="mailPersonne">Adresse e-mail</label>
                                 <div class="col-md-4">
-                                    <input id="mailUser" name="mailUser" placeholder="Saisir votre adresse e-mail"
+                                    <input id="mailPersonne" name="mailPersonne" placeholder="Saisir votre adresse e-mail"
                                            class="form-control input-md" required="" type="email">
                                 </div>
                             </div>

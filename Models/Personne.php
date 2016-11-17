@@ -22,6 +22,12 @@ class Personne
      */
     private $prenomPersonne;
     
+    /**
+     * @var $signUpDate date of the user sign up
+     */
+    private $signUpDate;
+
+
 
     /**
      * Personne constructor.
@@ -29,14 +35,15 @@ class Personne
      * @param $nomPersonne Nom de la personne
      * @param $prenomPersonne Prénom de la personne
      */
-    public function __construct($mailPersonne, $nomPersonne, $prenomPersonne)
+    public function __construct($mailPersonne, $nomPersonne, $prenomPersonne, $signUpDate)
     {
         $db = BDD::getPDOInstance();
         $this->cnx = $db->getDbh();
 
-        $this->mailPersonne = $mailPersonne;
-        $this->nomPersonne = $nomPersonne;
+        $this->mailPersonne   = $mailPersonne;
+        $this->nomPersonne    = $nomPersonne;
         $this->prenomPersonne = $prenomPersonne;
+        $this->signUpDate     = $signUpDate;
     }
 
 
@@ -55,10 +62,12 @@ class Personne
         if ($req->rowCount() == 0) {
         */
 
-            $sqlInsert = "INSERT INTO personne VALUES('',:nomPersonne,:prenomPersonne,:mailPersonne)";
+            $sqlInsert = "INSERT INTO personne VALUES('',:nomPersonne,:prenomPersonne,:mailPersonne,:dateInscription,'')";
             $valInsert = array(":nomPersonne"    => $this->nomPersonne,
                                ":prenomPersonne" => $this->prenomPersonne,
-                               ":mailPersonne"   => $this->mailPersonne);
+                               ":mailPersonne"   => $this->mailPersonne,
+                               ":dateInscription"=> $this->signUpDate
+                               );
             $reqInsert = $this->cnx->prepare($sqlInsert);
             $reqInsert->execute($valInsert);
 
@@ -120,7 +129,6 @@ class Personne
         while ($repid = $requestId->fetch(PDO::FETCH_OBJ)) {
             $idPersonne = $repid->idPersonne;
         }
-
         return $idPersonne;
     }
 }

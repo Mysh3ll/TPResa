@@ -3,9 +3,7 @@
  * Controller AfficheDatePicker-f.php
  * Permet de récupérer le path de l'image pour
  * la requête json du fichier date.js
- * /
-
-/* 
+ * 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -22,8 +20,14 @@ if(isset($_GET["dataSent"]))
 	$Events = new Event();
     //set variable avec le path de l'image depuis la BDD
 	$tabEvent = $Events->getPath($_GET["dataSent"]);
+
+	//set variable avec le path de la video depuis la BDD
+	$urlVideo = $Events->getPathVideo($_GET["dataSent"]);
+
     //set variable pour le format json
-	$jsonDate = array("afficheEvent" => $tabEvent);
+	$jsonDate = array("afficheEvent" => $tabEvent,
+					  "urlVideo"	 => $urlVideo
+					  );
     //encodage au format json
 	echo json_encode($jsonDate);
 }

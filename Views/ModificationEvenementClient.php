@@ -10,7 +10,7 @@ include '../Assets/includes/frontOffice/header-f.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <form id="inscriptionEvent" class="form-horizontal" method="post" >
+                <form id="reinscriptionEvent" class="form-horizontal" method="post" >
                     <fieldset>
 
                         <!-- Form Name -->
@@ -20,7 +20,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="NbrPlaces">Nombre de places réservées</label>
                             <div class="col-md-4">
-                                <input id="NbrPlaces" name="NbrPlaces" class="form-control input-md" type="text" disabled>
+                                <input id="NbrPlaces" name="NbrPlaces" class="form-control input-md" type="text" disabled value = <?php echo $nbPlaces ?>>
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                                 <h1> Choisir vos numéros de place dans le plan ci-dessous:</h1>
                                 <hr>
                                 <!-- SALLE #1 -->
-                                <div class="salle1">
+                                <div class="salle1 modifResa">
                                     <!-- SCENE -->
                                     <div class="scene1">
                                         <h1>SCENE</h1>
@@ -336,7 +336,7 @@ include '../Assets/includes/frontOffice/header-f.php';
                                 <!-- ./SALLE #1 -->
 
                                 <!-- SALLE #2 -->
-                                <div class="salle2">
+                                <div class="salle2 modifResa">
                                     <!-- SCENE -->
                                     <div class="scene2">
                                         <h1>SCENE</h1>
@@ -1255,12 +1255,18 @@ include '../Assets/includes/frontOffice/header-f.php';
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="ValiderEvent"></label>
                         <div class="col-md-8">
-                            <input id="ValiderParticipation" name="ValiderParticipation" type="submit"
+                            <input id="ValiderReBooking" name="ValiderReBooking" type="submit"
                                    class="btn btn-success" />
-                            <a href="../Controllers/ListeEventClient.php" class="btn btn-danger"
+                            <a href="../Controllers/DemandeModifEventClient.php" class="btn btn-danger"
                                role="button">Retour</a>
                         </div>
                     </div>
+
+                    <!-- Inputs for ajax Request -->
+                    <input id="idPersonne" hidden value= <?php echo $idPersonne ?> />
+                    <input id="mailPersonne" hidden value = <?php echo $mailPersonne ?> />
+                    <input id="idEvent"    hidden value= <?php echo $idEvent ?> />
+                    <input id="typeSalle"    hidden value= <?php echo $idSalle ?> />
 
 
                 </form>

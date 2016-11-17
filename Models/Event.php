@@ -9,6 +9,8 @@ class Event
     /**
      * Event constructor.
      */
+
+    private $statusLastQuery;
     public function __construct()
     {
         $db = BDD::getPDOInstance();
@@ -100,8 +102,22 @@ class Event
                                         );
             
             $reqParticipation = $this->cnx->prepare($sqlParticipation);
-            $reqParticipation->execute($valueParticipation); 
-            
+            $reqParticipation->execute($valueParticipation);     
+
+    }
+
+    public function updateParticipation($mailPersonne,$idEvent,$numPlace){
+
+        $s = "SELECT idPersonne FROM personne WHERE mailPersonne = :mail";
+        $r = $this->cnx->prepare($s);
+        $r->bindParam(':mail',$mailPersonne,PDO::PARAM_STR);
+        $r->execute();
+
+        if($rep = $r->fetch(PDO::FETCH_OBJ))
+        {
+            $idPersonne =  $rep->idPersonne;
+            $this->insertParticipation($idEvent, $idPersonne, $numPlace);
+        }
 
     }
 
@@ -182,7 +198,7 @@ class Event
         echo json_encode($nbrePlaceReserve, JSON_NUMERIC_CHECK);
     }
 
-    public function insertNewEvent($titre, $date, $type, $salle, $path = null)
+    public function insertNewEvent($titre, $date, $type, $salle, $path , $urlVideo)
     {
 
         $returnMessage = '';
@@ -204,11 +220,12 @@ class Event
                                  ':dateE'    => $date,
                                  ':salle'    => $salle,
                                  ':type'     => $type,
-                                 ':pathImg'  => $path
+                                 ':pathImg'  => $path,
+                                 ':pathVideo'=> $urlVideo
             );
 
-            $r = 'INSERT INTO event( titreEvent, dateEvent,idType,path,idSalle)
-                  VALUES (:titre,:dateE,:type,:pathImg,:salle)';
+            $r = 'INSERT INTO event( titreEvent, dateEvent,idType,path,idSalle,urlVideo)
+                  VALUES (:titre,:dateE,:type,:pathImg,:salle,:pathVideo)';
 
             $ret = $this->cnx->prepare($r);
             $ret->execute($paramsEvent);
@@ -360,6 +377,22 @@ class Event
         return $tabTypeEvent;
     }
 
+    public function getSalleEvent($idEvent){
+         $selectSalles = "SELECT idSalle
+                          FROM event
+                          WHERE idEvent = :idEvent
+                        ";
+
+        $request = $this->cnx->prepare($selectSalles);
+        $request->bindParam(':idEvent',$idEvent,PDO::PARAM_INT);
+        $request->execute();
+
+        if ($repEvent = $request->fetch()){
+            return $repEvent->idSalle;
+        }else{
+            return false;
+        }
+    }
 
     public function getSalles(){
 
@@ -438,6 +471,40 @@ class Event
 		$r->execute($val);
 	}
 
+    public function deleteReservation($idEvent,$mailPersonne){
+
+        $s = "DELETE 
+              FROM participer
+              WHERE idEvent = :idEvent
+              AND idPersonne IN (SELECT idPersonne FROM personne WHERE mailPersonne = :mailPersonne)";
+
+
+        $val = array(':idEvent'      => $idEvent,
+                     ':mailPersonne' => $mailPersonne
+                     );
+        $r = $this->cnx->prepare($s);
+        $r->execute($val);
+
+        $this->testStateRequestFunction($r);
+    }
+
+    public function testStateRequestFunction($executedQueryObject){
+
+         if ($executedQueryObject->rowCount() > 0) {
+            $this->setStatusLastQuery(true);
+        }else{
+            $this->setStatusLastQuery(false);
+        }
+    }
+
+    public function getStatusLastQuery(){
+        return $this->statusLastQuery;
+    }
+
+    public function setStatusLastQuery($status){
+        $this->statusLastQuery = $status;
+    }
+
 	public function getPath($dateEvent)
     {
         $s = "SELECT path FROM event WHERE dateEvent = :dateEvent";
@@ -449,5 +516,17 @@ class Event
             return $rep->path;
         }
     }
+
+    public function getPathVideo($dateEvent){
+        $s = "SELECT urlVideo FROM event WHERE dateEvent = :dateEvent";
+        $val = array("dateEvent" => $dateEvent);
+        $r = $this->cnx->prepare($s);
+        $r->execute($val);
+        while($rep = $r->fetch(PDO::FETCH_OBJ))
+        {
+            return $rep->urlVideo;
+        }
+    }
+
 
 }

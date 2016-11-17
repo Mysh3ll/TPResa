@@ -20,7 +20,9 @@ include '../Assets/includes/frontOffice/header-f.php';
                         </div>
                         <div class="modal-body">
                             <h4>Confirmation de modification</h4>
-                            <p>Cette opération est irréversible, veuillez confirmer votre choix.</p>
+                            <p>Vous êtes sur le point de supprimer l'ensemble de vos places réservées pour cet évènement.</p>
+                            <p> Vous pourrez reserver à nouveau dans la limite des stocks disponibles.</p>
+                            <p>Cette opération est irréversible, veuillez confirmer votre choix !</p>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group">
@@ -43,24 +45,22 @@ include '../Assets/includes/frontOffice/header-f.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <form class="form-horizontal" id="FormModifEvent" action="#" method="post">
+                <form class="form-horizontal" id="FormModifEvent" action="../Controllers/ModifEventClient.php" method="post">
                     <fieldset>
 
                         <!-- Form Name -->
-                        <legend><h1>Liste des événements</h1></legend>
+                        <legend><h1>Liste des événements réservés</h1></legend>
 
                         <!-- Select Basic -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="ListeModifEvent">Choix de l'événement</label>
                             <div class="col-md-4">
                                 <select id="ListeModifEvent" name="ListeModifEvent" class="form-control">
-                                    <option value="1">babar</option>
-                                    <option value="2">kiki</option>
-                                    <option value="3">zorro</option>
+                                <?php echo $htmlSelectListEvent ?>
                                 </select>
                             </div>
                         </div>
-
+                        <input hidden id="mail" name="mail" value = <?php echo $mailUrl?> />
                         <!-- Button -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="ValiderModifEvent"></label>

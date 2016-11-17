@@ -30,6 +30,16 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
     $type = $_POST['TypeEvent'];
     $salle = $_POST['TypeSalle'];
 
+    if(!empty($_POST['videoEvent'])){
+        //L'utilisateur entre une url YT complete : https://www.youtube.com/watch?v=idDeLaVideo
+        $fullUrl = $_POST['videoEvent'];
+    
+        //On recupere une sous chaine de l'url totale, l'id de la video.
+        $urlVideo = substr($fullUrl, 32);
+    }else{
+        $urlVideo = null;
+    }
+
 
     // si on inclue une affiche à l'événement
     if (isset($_POST['upload'])) {
@@ -65,7 +75,8 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
                 //$path = $dir_dest. '/' . $handle->file_dst_name;
                 $path = $handle->file_dst_name;
                 $eventToCreate = new Event();
-                $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle, $path);
+
+                $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle, $path, $urlVideo);
 
                 $message = $returnInsertion;
                 // we delete the temporary files
@@ -77,11 +88,14 @@ if (isset($_POST['TitreEvent'], $_POST['inputDate'], $_POST['TypeEvent'], $_POST
             }
 
         } else {
+            $path = null;
+
             // si on n'inclue pas d'affiche à l'évènement
             $eventToCreate = new Event();
-            $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle);
+            $returnInsertion = $eventToCreate->insertNewEvent($titre, $date, $type, $salle, $path, $urlVideo);
 
             $message = $returnInsertion;
+
         }
     }
 }
